@@ -101,6 +101,39 @@ namespace MyProject
             }
             return smallMatrix;
         }
-      
+
+        public Matrix GetCol(int a)
+        {
+            return GetCol(a, a);
+        }
+
+        private Matrix GetMinor(int a, int b)    // Return the minor
+        {
+            double[] minorData = new double[m*n - m-n+1]; // array of minor data to be filled
+            int dataFillIndex = 0;
+            for (int j = 1; j <= n; j++) //loop through each element, saving them to the array temporarily
+            {
+                for (int i = 1; i <= m; i++)
+                {
+                    if( i != a && j != b)
+                    {
+                        minorData[dataFillIndex] = this[i, j];
+                        dataFillIndex++;
+                    }
+                }
+            }
+            return new Matrix(minorData, m - 1, n - 1);
+        }
+
+
+
+
+    }
+
+    public class MatrixException : Exception
+    {
+        public MatrixException(string Message)
+            : base(Message)
+        { }
     }
 }
